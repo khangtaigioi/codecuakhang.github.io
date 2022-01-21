@@ -378,12 +378,12 @@ using namespace std;
 string ss(string a,string b)
 {
     while(a.size()<b.size()) a='0'+a;
-    while(a.size()>b.size()) b='0'+b;
+    while(a.size()>b.size()) b='0'+b;					// so sanh 2 so string
     if(a < b) cout << -1;
     else if(a > b) cout << 1;
     else cout << "=";
 }
-int main()                                          // so sanh 2 so string
+int main()                                          
 {
     string a,b;
     cin >> a >> b;
@@ -977,7 +977,7 @@ int main()
 using namespace std;
 long long gt(int n) {
     long long s = 1;
-    for (long long i = 1; i <= n; i++)
+    for (long long i = 1; i <= n; i++)              //PK0006B - Tổ Hợp - http://laptrinhphothong.vn/Problem/Details/5847
         s *= i;
     return s;
 }
@@ -1528,7 +1528,7 @@ int main()
     for(int i=0;i<n;i++){
         cin >> a[i];
     }
-    vector<int>luu;
+    vector<int>luu;             //số lớn hơn k - N0451B - http://laptrinhphothong.vn/Problem/Details/6020
     sort(a,a+n);
     for(int i=0;i<n;i++){       //Cho một dãy N số nguyên và số nguyên k, hãy viết chương trình in ra số nhỏ nhất trong dãy số mà lớn hơn k.
         if(a[i]>k){             // 45 thằng làm được trên ltpt nhá =))
@@ -2027,8 +2027,8 @@ int main()
     /*for(int i=1;i<=n*n;i++){
         luu.push_back(i);
     }
-    */
-   /* for(int i=0;i<luu.size();i++){
+
+    for(int i=0;i<luu.size();i++){
         //if(luu[i]/2!=1) luu[i]+=1;
         //else luu[i]-=1;
     }
@@ -2062,7 +2062,7 @@ int main()
             cout<<A[hang][cot];
         }
     }
-
+ */
     /*for(int i=0;i<luu.size();i++){
         dem++;
         cout << luu[i] << " ";
@@ -2560,7 +2560,7 @@ int main()
     long long n,tong=0; cin >> n;
     for(long long i=1;i<=sqrt(n);i++){
         if(n%i==0) tong+=i+(n/i);
-        else if((sqrt(n)*sqrt(n))==n) tong=tong-sqrt(n);   //  tổng ước
+        else if((sqrt(n)*sqrt(n))==n) tong=tong-sqrt(n);  											 //  tổng ước
     }
     cout << tong;
     return 0;
@@ -2599,7 +2599,7 @@ bool snt(int n)
 }
 int main()
 {
-    int a,b,dem=0; cin >> a >> b;    // in ra so nguyen to trong doan tu a den b
+    int a,b,dem=0; cin >> a >> b;   							 // in ra so nguyen to trong doan tu a den b
     for(int i=a;i<=b;i++){
         if(snt(i)){
             dem++;
@@ -3768,25 +3768,1004 @@ int main()
     return 0;
 }
 
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006];
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(); cout.tie();
+    int n,dem=0; cin >> n;
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
+    }
+    for(int i=1;i<=n;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]>a[j]){
+                swap(a[i],a[j]);
+            }
+        }
+    }
+    cout << a[n]-a[1];
+    return 0;
+}
 
-*/
+
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+int main()
+{
+    map<char,int> map;
+    string s; cin >> s;
+    for(int i=0;i<s.size();i++){
+        if(s[i]>='a' && s[i]<='z'){                             //N0617B - Số kí tự phân biệt 2 - http://laptrinhphothong.vn/Problem/Details/5742
+            s[i]-=32;
+        }
+    }
+    for(int i=0;i<s.size();i++){
+        map[s[i]]++;
+    }
+    for(auto i : map){
+        cout << i.first << " " << i.second << endl;
+    }
+    return 0;
+}
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int a[100];
+int main()
+{
+	int n, dem = 0; cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+
+	for (int i=0;i<n-1;i++) {
+    	int j=i+1;
+    	while (j<n) {
+    	    if (a[i]==a[j]) {
+        	    for (int k=j;k<n-1;k++) a[k]=a[k+1];                //N0434B - Dãy phân biệt - http://laptrinhphothong.vn/Problem/Details/5776
+    	        n=n-1;
+    	    }
+            else j=j+1;
+        }
+    }
+    n--;
+	for (int i = 0; i < n+1; i++) {
+		cout << a[i] << " ";
+	}
+	return 0;
+}
+
 
 #include <bits/stdc++.h>
 using namespace std;
-int a[100005];
-int main(){
-    int n,q,u,v; cin >> n >> q;
+int a[1000005];
+int main() {
+    int n; cin >> n;
     for(int i=0;i<n;i++){
         cin >> a[i];
     }
-    for(int k=0;k<q;k++){
-        cin >> u >> v;
-        swap(a[u],a[v]);
-        for(int i=0;i<n;i++){
-            cout << a[i] << " ";
+    int m=0;
+    for(int i=0;i<n-1;i++){
+        int dem=0;
+        for(int j=i+1;i<n;j++){
+            if(a[i]%2==0 && a[j]%2==0){
+                dem++;
+            }
+        }
+        if(m<dem){
+            m=dem;
         }
     }
-    
+    cout << m;
+    return 0;
+}
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main ()
+{
+ long long xa,ya,xb,yb,xc,yc;
+ cin>>xa>>ya>>xb>>yb>>xc>>yc;
+ if ((yc-ya)*(xb-xa)==(xc-xa)*(yb-ya))          // 3 diem thang hang
+ cout<<"YES";
+ else cout<<"NO";
+ return 0;
+}
+
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int a[1000005],b[1000005],c[2000015];
+int main()
+{
+    int n; cin >> n;
+    int m=n,cs=0;
+    for(int i=0;i<n;i++) cin >> a[i];               //trộn mảng - http://laptrinhphothong.vn/Problem/Details/4608
+    for(int i=0;i<m;i++) cin >> b[i];
+    for(int i=0;i<n;i++){
+            c[cs]=a[i]; cs++;
+    }
+    for(int i=0;i<m;i++){
+            c[cs]=b[i]; cs++;
+    }
+    sort(c,c+n+m,greater<int>());
+    for(int i=0;i<n+m;i++) cout << c[i] << " ";
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000005];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n;
+    double kq,xetcuoi,xetdau;
+    cin >> n;
+    for(int i=0;i<n;i++) cin >> a[i];               //N0421D - phan tu trung vi
+    if(n%2!=0){
+        sort(a,a+n);
+        cout << a[n/2];
+    }
+    else if(n%2==0){
+        sort(a,a+n);
+        xetcuoi=a[n/2-1];
+        xetdau =a[n/2];
+        kq=(xetcuoi+xetdau)/2;
+        cout << kq;
+    }
+    else
+        return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+long long a[100005],n,t,k;
+int main(){
+    cin >> n;
+    for(long long i=1;i<=n;i++){                        //N0419C - Giá trị nhỏ nhất đến phần tử thứ k - http://laptrinhphothong.vn/Problem/Details/5606
+        cin >> a[i];
+    }
+    cin >> t;
+    for(long long j=1;j<=t;j++){
+        cin >> k;
+        cout << *min_element(a+1,a+k+1) << '\n';
+
+    }
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006],f[1000006];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n,cs,kq = 1; cin >> n;
+    for(int i=1;i<=n;i++) cin >> a[i];
+    for (int i=1; i<=n; i++) {
+        f[i] = 0;
+        for (int j=0; j<i; j++){
+            if (a[j]%2!=0 && a[i]%2!=0) f[i] = f[j]+1;              //N0426D - Đoạn con số lẻ - http://laptrinhphothong.vn/Problem/Details/5926
+            else f[i]=1;
+        }
+        if(kq<f[i]){
+            kq=f[i]; cs=i;
+        }
+    }
+    cout << kq << endl;
+    for (int i = cs - kq + 1; i <= cs; i++) cout << a[i] << " ";
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006],f[1000006];
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n,cs,kq = 1; cin >> n;
+    for(int i=1;i<=n;i++) cin >> a[i];              //N0422D - Đoạn con số chẵn
+    for (int i=1; i<=n; i++) {
+        f[i] = 0;
+        for (int j=0; j<i; j++){
+            if (a[j]%2==0 && a[i]%2==0) f[i] = f[j]+1;
+            else f[i]=1;
+        }
+        if(kq<f[i]){
+            kq=f[i]; cs=i;
+        }
+    }
+    cout << kq << endl;
+    for (int i = cs - kq + 1; i <= cs; i++) cout << a[i] << " ";
+    return 0;
+}
+
+
+/*#include <bits/stdc++.h>
+using namespace std;
+int a[1000006];
+int main(){
+    int n; cin >> n;
+    for(int i=0;i<n;i++){     //tính tuổi
+        cin >> a[i];
+    }
+    set<int>luu;
+    for(int i=0;i<n;i++){
+        luu.insert(a[i]);
+    }
+    cout << luu.size();
+    return 0;
+}
+
+//Mảng tần số
+#include <bits/stdc++.h>
+using namespace std;
+int ts[125];
+int main(){
+    int n,tuoi; cin >> n;
+    for(int i=0;i<n;i++){     //tính tuổi
+        cin >> tuoi;
+        ts[tuoi]++;
+    }
+    int dem=0;
+    for(int i=0;i<=120;i++){
+        if(ts[i]>0) dem++;
+    }
+    cout << dem;
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+char a[105],temp;
+int main(){
+    int n,max=0; cin >> n;
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+    }
+    sort(a,a+n);
+    for(int i=0;i<n-1;i++){                 //ky tu xuat hien nhieu nhat - sai test 8
+        int dem=1;
+        for(int j=i+1;j<n;j++){
+            if(a[i]==a[j]){
+                dem++;
+                if(max<dem){
+                    max=dem;
+                    temp=a[i];
+                }
+            }
+            else dem=1;
+        }
+    }
+    cout << temp;
+    return 0;
+}
+
+
+// http://laptrinhphothong.vn/Problem/Details/5887 - N0415B1 - Số lần xuất hiện 0.0
+/// cách 1:
+#include <bits/stdc++.h>
+using namespace std;
+int ts[1000006];
+int main(){
+    int a,temp;
+    int max=0;
+    int n; cin >> n;
+    for(int i=0;i<n;i++){
+        cin >> a;
+        ts[a]++;
+    }
+    for(int i=0;i<=1000;i++){
+        if(max<ts[i]){
+            max=ts[i];
+        }
+    }
+    cout << max;
+    return 0;
+}
+
+
+//đếm số lần xuất hiện nhiều nhất  Cách 2:
+#include <bits/stdc++.h>
+using namespace std;
+int ts[1000006];
+int main(){
+    int a,temp;
+    int max=0;
+    int n; cin >> n;
+    for(int i=0;i<n;i++){
+        cin >> a;
+        ts[a]++;
+        if(max<ts[a]){
+            max=ts[a];
+        }
+    }
+    cout << max;
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int ts[1000004],a[1000004];
+set<int>luu;
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);                    //so lan xuat hien 1.0 - qua thoi gian
+    int n; cin >> n;
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+        luu.insert(a[i]);                   //cach 1
+        ts[a[i]]++;
+    }
+    for(auto i : luu){
+        cout << i << " " << ts[i] << endl;
+    }
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int ts[1000004],a[1000004];
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n,M=0; cin >> n;                                //cách chuẩn nhất hành tinh
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+        ts[a[i]]++;
+        if(M<a[i]){
+            M=a[i];
+        }
+    }
+    for(int i=0;i<=M;i++){
+        if(ts[i] > 0){
+            cout << i << " " << ts[i] << '\n';
+        }
+    }
+    return 0;
+}
+
+
+
+#include <iostream>
+using namespace std;
+
+const int MAX = 1e6;
+int cnt[MAX],a[MAX];
+
+int main(){
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+    }
+    for(int i = 0;i < MAX; i++) cnt[i] = 0;             //cach 2
+    for(int i = 0; i < n;i++){
+        cnt[a[i]]++;
+    }
+    for(int i = 0;i < MAX; i++){
+        if(cnt[i] > 0){
+            cout << i << " " << cnt[i] << endl;
+        }
+    }
+}
+#include <iostream>
+#include <map>
+using namespace std;
+const int N = 1e6;
+int a[N];
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n;
+    cin >> n;
+    map<int, int> cnt;
+    for(int i = 0; i < n;i++){
+        cin >> a[i];
+        cnt[a[i]]++;
+    }
+    for(auto it : cnt){
+        cout << it.first << " " << it.second << '\n';
+    }
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n; cin >> n;
+    map<char, int> luu;
+    for(int i=0;i<n;i++){                   //N0417B - Ký tự xuất hiện nhiều nhất - http://laptrinhphothong.vn/Problem/Details/4606
+        char s; cin >> s;
+        luu[s]++;
+    }
+    char kq;
+    int max=0;                                  //cach 1
+    for(auto it : luu){
+        if(it.second > max){
+            max=it.second;
+            kq=it.first;
+        }
+    }
+    cout << kq << " " << max;
+    return 0;
+}
+
+#include <bits/stdc++.h>
+using namespace std;
+int ts[125];
+int main()
+{
+    int n,m=0; cin >> n;
+    char kq;char s;
+    for(int i=1;i<=n;i++){
+        cin >> s;
+        ts[s]++;
+    }
+    for(int i=97;i<=122;i++){                           //cach 2 - mảng tần số
+        if(m<ts[i]){
+            m=ts[i];
+            kq=char(i);
+        }
+    }
+    cout << kq;
+    return 0;
+}
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006];
+int main()
+{
+    int n; cin >> n;
+    map<int, int> luu;
+    for(int i=0;i<n;i++){
+        cin >> a[i];
+        luu[a[i]]++;                        // in ra số xuất hiện nhiều nhất và số lần xuất hiện của nó
+    }
+    int kq,max=0;
+    for(auto it : luu){
+        if(it.second > max){
+            max=it.second;
+            kq=it.first;
+        }
+    }
+    cout << kq << " " << max;
+    return 0;
+}
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int ts[1000006],a[1000006];
+vector<int> luu ;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++){                           //N0439B - Số lần xuất hiện 2.0 - http://laptrinhphothong.vn/Problem/Details/5894
+        cin >> a[i];
+        luu.push_back(a[i]);
+        ts[a[i]]++;
+    }
+    for(auto i : luu){
+        cout << i << " " << ts[i] << '\n';
+    }
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[2*1000005],ts[2*1000005];
+int main(){
+    map<int,int> map;
+    int n; cin >> n;
+    for(int i=0;i<n;i++) {
+        cin >> a[i];
+        map[a[i]]++;
+    }
+    for(auto i : map ){
+        if(i.second%2 !=0 ) {                   //N0441B - Sắp xếp - http://laptrinhphothong.vn/Problem/Details/5902
+            cout << i.first;
+            return 0;
+        }
+    }
+    return 0;
+}
+
+
+#include<iostream>
+#include<math.h>
+#define maxm 100
+#define maxn 100
+using namespace std;
+
+void nhap(int a[maxm][maxn],int &m,int &n)
+{
+    cin >> n;
+    m=n;
+    for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
+        {
+            cin>>a[i][j];
+         }
+}
+int tinhxungquanh(int a[maxm][maxn],int m,int n)                    //N0508C - Tổng trên biên ma trận - http://laptrinhphothong.vn/Problem/Details/4617
+{
+    int s=0;
+    for(int i=0;i<m;i++)
+    {
+        s=s+a[i][0]+a[i][n-1];
+    }
+    for(int j=1;j<n-1;j++)
+    {
+        s=s+a[0][j]+a[m-1][j];
+    }
+    return s;
+}
+int a[maxm][maxn];
+int main()
+{
+    int m,n,k;
+    nhap(a,m,n);
+    cout<<tinhxungquanh(a,m,n)<<endl;
+}
+
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[101][101];
+    int m,n,Max=0,s=0,cs;
+    cin >> n >> m;
+    for (int i=1;i<=n;i++)
+    {
+        for (int j=1;j<=m;j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+    for (int j=1;j<=m;j++)
+    {
+        Max=Max+a[1][j];
+    }
+    cs=1;
+    for(int i=2;i<=n;i++){
+        s = 0;
+        for (int j = 1; j <= m; j++) {              //N0517B - Hàng có tổng bé nhất - http://laptrinhphothong.vn/Problem/Details/5758
+            s += a[i][j];
+        }
+    if(Max>s)
+    {
+        Max=s;
+        cs=i;
+    }
+    }
+
+    cout << cs;
+
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000][1000];
+int main()
+{
+	int n,m,Max=0,s;
+	cin >> m >> n;
+	for(int i=0;i<m;i++)
+		for(int j=0;j<n;j++)
+		{
+			cin >> a[i][j];
+		}
+	s=0;
+    for(int i=0;i<m;i++)
+	{
+        for (int j = 0; j < n; j++)                     //N0501B - Tổng hàng - http://laptrinhphothong.vn/Problem/Details/5862
+		{
+            s += a[i][j];
+        }
+        cout <<"\t"<< s<<endl;
+		s=0;
+	}
+	return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1002][1002];
+int main()
+{
+    vector<int>l;
+    int n,m,dem=0;
+    cin >> n >> m;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin >> a[i][j];
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            l.push_back(a[i][j]);                   //N0545B - Ma trận thưa - http://laptrinhphothong.vn/Problem/Details/5913
+        }
+    }
+    for(int i=0;i<l.size();i++){
+        if(l[i]==0) dem++;
+    }
+    if(dem > n*m/2) cout << "YES";
+    else cout << "NO";
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int mat[105][105];
+int main(){
+   int sum = 0;
+   int row,col;
+   cin >> row;
+   col=row;
+   for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {                       //N0506A - Tổng trên đường chéo chính - http://laptrinhphothong.vn/Problem/Details/4615
+         cin >> mat[i][j];
+      }
+   }
+   for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+         if (i == j)
+            sum = sum + mat[i][j];
+      }
+   }
+   cout << sum;
+   return 0;
+}
+
+
+
+
+#include <iostream>
+
+using namespace std;
+int WordCount(string str)
+{
+    int word = (str[0] != ' ');
+    for (int i = 0; i < str.size() - 1; i++)
+    {
+        if (str[i] == ' ' && str[i + 1] != ' ')
+        {
+            word++;
+        }
+    }
+    return word;
+}
+int main()
+{
+    string s; getline(cin,s); cout << WordCount(s);     //N0607B - Đếm số từ - http://laptrinhphothong.vn/Problem/Details/4627
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006];
+int main()
+{
+    int n,w,dem=0; cin >> n >> w;
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
+    }
+    for(int i=1;i<=n;i++){
+        if(a[i]>w){
+            dem++;
+            cout << i << " " << a[i]-w << " " << '\n';          //N0407B - Cứu trợ - http://laptrinhphothong.vn/Problem/Details/5859
+        }
+    }
+    if(dem==0) cout << 0;
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[100005],f[100005];
+int main()
+{
+    int n,kq=0,dem=0;
+    cin >> n;
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
+        if(a[i]==1) dem++;
+    }
+    if(dem==0) cout << -1;
+    f[0]=0;
+    for(int i=1;i<=n;i++){                                  //N0433B - Dãy số 1 - http://laptrinhphothong.vn/Problem/Details/5775
+        if(a[i]==1){
+            f[i]=f[i-1]+1;
+        }
+        else {
+            f[i]=0;
+        }
+        kq=max(kq,f[i]);
+    }
+    for(int i=1;i<=kq;i++){
+        cout << 1 << " ";
+    }
+    return 0;
+}
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[100006],ts[100006];
+vector<int> luu;
+int main()
+{
+    int n,k,dem=0; cin >> n >> k;
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
+        ts[a[i]]++;
+    }
+    for(int i=1;i<=1000;i++){
+        if(ts[i]>=k){
+            dem++;
+            luu.push_back(i);
+        }
+    }
+    if(dem>=k){
+        sort(luu.begin(),luu.end());
+        for(auto i : luu){
+            cout << i << " ";
+        }
+    }
+    if(dem==0) cout << -1;
+
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+using namespace std;
+long long n;
+int k,l;
+int main()
+{
+    cin >> n >> k >> l;
+    vector<int>a(n); vector<int>luu;                //H2_B - Chèn thêm phần tử vào mảng - http://laptrinhphothong.vn/Problem/Details/6041
+    for(int i=1;i<=n;i++)
+    {
+        cin >> a[i];
+        luu.push_back(a[i]);
+    }
+    luu.insert(luu.begin()+k-1,l);
+    for(int i=0;i<luu.size();i++)
+    {
+        cout << luu[i] << " ";
+    }
+    return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+using namespace std ;
+int main(){
+    int n,x;
+    cin >> n >> x;
+    vector<int>a(n);
+    for(int i=0;i<n;i++){           //H1_A - Xóa phần tử trong mảng - http://laptrinhphothong.vn/Problem/Details/6039
+        cin >> a[i];
+    }
+    a.erase(a.begin()+x-1);
+    for(auto i : a)
+        cout << i << " ";
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+void XoaPhanTu(int a[], int n, int vt)
+{
+	for(int i=vt; i<=n; i++)
+		a[i] = a[i+1];
+	n--;
+	for(int i=1;i<=n;i++)
+    {
+        cout << a[i]  << " ";
+    }
+}
+int a[1000001];                     /H1_A - Xóa phần tử trong mảng - http://laptrinhphothong.vn/Problem/Details/6039
+int main()
+{
+    int n,vt;
+    cin >> n >> vt;
+    for(int i=1;i<=n;i++)
+    {
+        cin >> a[i];
+    }
+    XoaPhanTu(a,n,vt);
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int a[1000006];
+int main() {
+    int n, vt, x;
+    cin >> n >> vt >> x;
+    for(int i=1;i<=n;i++) {
+        cin >> a[i];
+    }
+    for(int i=n;i>=vt;i--) {        // H2_B - Chèn thêm phần tử vào mảng - http://laptrinhphothong.vn/Problem/Details/6041
+        a[i+1]=a[i];
+    }
+    a[vt]=x;
+    n++;
+    for(int i=1;i<=n;i++) {
+        cout << a[i] << " ";
+    }
+    return 0;
+}
+
+
+
+#include <iostream>
+
+using namespace std;
+bool binarySearch(long long arr[], int n, long long x) {
+  int r = n - 1;
+  int l = 0;
+  while (r >= l) {
+    int mid = l + (r - l) / 2;
+    if (arr[mid] == x)
+      return true;
+    if (arr[mid] > x)
+      r = mid - 1;
+    if (arr[mid] < x)                       //tim kiem nhi phan 1 - SB01A - Tìm kiếm nhị phân 1 - http://laptrinhphothong.vn/Problem/Details/5927
+      l = mid + 1;                          //tham khảo : https://nguyenvanhieu.vn/thuat-toan-tim-kiem-nhi-phan/
+  }
+  return false;
+}
+long long a[100005], x;
+int main()
+{
+    long long n, x; cin >> n >> x;
+    for(int i=0;i<n;i++) {
+        cin >> a[i];
+    }
+    if(binarySearch(a,n,x)==true) cout << "Y";
+    else cout << "N";
+    return 0;
+}
+
+
+
+#include <iostream>
+
+using namespace std;
+bool binarySearch(long long arr[], int left, int right, long long x) {
+    int middle;
+    while(left <= right) {
+        middle = (left + right) / 2;
+        if (arr[middle] == x)
+            return true;
+        if (x > arr[middle])
+            left = middle + 1;
+        else
+            right = middle - 1;
+    }
+    return false;
+}
+long long a[100005], x;
+int main()
+{
+    long long n, x; cin >> n >> x;                      //SB01A - Tìm kiếm nhị phân 1 - http://laptrinhphothong.vn/Problem/Details/5927
+    for(int i=0;i<n;i++) {                              // tham khao :  https://freetuts.net/thuat-toan-tim-kiem-nhi-phan-2634.html
+        cin >> a[i];
+    }
+    if(binarySearch(a,0,n-1,x)==true) cout << "Y";
+    else cout << "N";
+    return 0;
+}
+
+
+
+
+#include <iostream>
+using namespace std;
+int dem (int a[], int x, int n) {
+    int dem=0;
+    for(int i=1;i<=n;i++) {
+        if(a[i]==x) {
+            dem++;
+        }
+    }
+    return dem;
+}
+int a[1005],x;											//PK0016C1 - Xổ số 1 - http://laptrinhphothong.vn/Problem/Details/5899
+int main()
+{
+    int n; cin >> n;
+    for(int i=1;i<=n;i++) {
+        cin >> a[i];
+    }
+    int q; cin >> q;
+    for(int i=1;i<=q;i++) {
+        cin >> x;
+        cout << dem(a,x,n) << '\n';
+    }
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+long long k,x,n,a;
+map<long long,long long> mp;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    cin >> n;
+    for(long long i=1;i<=n;i++) {               //PK0016C2 - Xổ số 2 - http://laptrinhphothong.vn/Problem/Details/5900
+        cin >> a;
+        mp[a]++;
+    }
+    cin >> k;
+    for(long long i=1;i<=k;i++) {
+        cin >> x;
+        cout << mp[x] << '\n';
+    }
     return 0;
 }
 
@@ -3795,942 +4774,945 @@ int main(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#include <bits/stdc++.h>
+using namespace std;
+int a,ts[100001];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+    int n,dem=0; cin >> n;
+    for(int i=1;i<=n;i++){                      N0430C - Đếm cặp phần tử trùng - http://laptrinhphothong.vn/Problem/Details/5827
+        cin >> a;
+        ts[a]++;
+    }
+    for(int i=1;i<=1000;i++) {
+        if(ts[i]>1) {
+            dem=dem+((ts[i]*(ts[i]-1))/2);  //công thức suy ra
+        }
+    }
+    cout << dem;
+    return 0;
+}
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+long long c1,c2;
+long long uoc(long long a,long long b)
+{
+  long long kq=0;
+  for(long long i=1;i*i<=a;i++)
+  {
+    if(a%i==0)
+    {
+      if(b%(i*3)==0) kq=kq+i;
+      if(a/i!=i)
+      {
+        if(b%(3*(a/i))==0) kq=kq+a/i;             //HSG12NAA1 - Tính tổng các ước - http://laptrinhphothong.vn/Problem/Details/6071
+      }
+    }
+  }
+  return kq;
+}
+int main()
+{
+ cin >> c1 >> c2;
+ cout << uoc(c1,c2);
+ return 0;
+
+}
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    string s,s1;
+    int f;
+    getline(cin,s);                     //N0623A - Xâu con 1 - http://laptrinhphothong.vn/Problem/Details/5751
+    getline(cin,s1);
+    f = s.find(s1);
+    if (f>=0) cout << f;
+    else cout << "NO";
+}
+
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int a[200005];
+int main()
+{
+    int n;
+    cin >> n;
+    for(int i=0;i<n;i++) cin >> a[i];               //N0440B - Khoảng cách lớn nhất - http://laptrinhphothong.vn/Problem/Details/5901
+    sort(a,a+n);
+    cout << max(abs(a[0]+a[1]),abs(a[n-1]+a[n]));
+    return 0;
+}
+
+
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+int n,a,dem=0,dem2=0;
+map<int,int> m;
+int main()
+{
+
+    cin >> n;
+    for(int i=1;i<=n;i++) {
+        cin >> a;
+        m[a]++;
+    }
+    for(auto i : m) {
+        if(i.second==i.first){          //N0421B - Bộ tộc - http://laptrinhphothong.vn/Problem/Details/5885
+            dem++;
+        }
+        else if(i.second>i.first){
+            dem2+=i.second/i.first;
+        }
+    }
+    cout << dem+dem2;
+    return 0;
+}
+
+
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+int n,m,a[105],x,y;
+int main()
+{
+    cin >> n >> m;
+    for(int i=1;i<=n;i++) {
+        cin >> a[i];
+    }
+    for(int i=1;i<=m;i++) {             //PK0001B - SWAPAB - http://laptrinhphothong.vn/Problem/Details/5836
+        cin >> x >> y;
+        swap(a[x],a[y]);
+    }
+    for(int i=1;i<=n;i++) {
+        cout << a[i] << " ";
+    }
+    return 0;
+}
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+int n,m,a[105],x,y;
+int main()
+{
+    cin >> n >> m;
+    for(int i=1;i<=n;i++) {
+        cin >> a[i];
+    }
+    for(int i=1;i<=m;i++) {         //PK0002B - Biến đổi mảng - http://laptrinhphothong.vn/Problem/Details/5837
+        cin >> x >> y;
+        a[x]+=y;
+    }
+    for(int i=1;i<=n;i++) {
+        cout << a[i] << " ";
+    }
+    return 0;
+}
+
+
+
+
+#include <iostream>
+
+using namespace std;
+
+string cong(string num1, string num2) {
+    string kq = "";
+    int so = 0;
+    while (num1.size() < num2.size()) num1 = '0' + num1;
+    while (num1.size() > num2.size()) num2 = '0' + num2;
+    int n = num1.size();
+    for (int i = n - 1; i >= 0; i--) {
+        so = (num1[i] - '0') + (num2[i] - '0') + so;
+        kq = char((so % 10) + '0') + kq;
+        so /= 10;
+    }
+    if (so > 0) {
+        kq = '1' + kq;
+    }
+    return kq;
+}
+
+int main() {
+   string f[1001];
+    f[1] = "1", f[2] = "1";
+    for (int i = 3; i <= 1000; i++) {               //PK0018CC - Số Fibonacci - http://laptrinhphothong.vn/Problem/Details/6066
+        f[i] = cong(f[i - 1], f[i - 2]);
+    }
+    int n;
+    while (cin >> n) {
+        cout << f[n] << endl;
+    }
+    return 0;
+}
+
+
+
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    long long n, x;
+    cin >> n >> x;                  //n0801b - Không chia hết - http://laptrinhphothong.vn/Problem/Details/6061
+    cout << n - n / x;
+}
+
+
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+int dem(string s){
+    int dem=1,kq=0;
+    for(int i=0;i<s.size();i++) {
+        if(s[i]==s[i+1]) dem++;
+        else dem=1;
+        kq=max(kq,dem);
+    }
+    return kq;
+}
+string s;
+int main()
+{
+    int n,kq=0;                         //HSG12NAA2 - Thành phố xanh đẹp - http://laptrinhphothong.vn/Problem/Details/6072
+    cin >> n;
+    for(int i=0;i<n;i++) {
+        cin >> s;
+        kq=max(kq,dem(s));
+    }
+    cout << kq;
+    return 0;
+}
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long f[61];
+
+bool prime(long long n) {
+    if (n < 2) return false;
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    f[1] = f[2] = 1;
+    for (int i = 3; i <= 60; i++) {             //N1005B - Số nguyên tố fibonacci - http://laptrinhphothong.vn/Problem/Details/5626
+        f[i] = f[i - 1] + f[i - 2];             // cach 1 - accecpted
+    }
+    long long n, pos = 60;
+    cin >> n;
+    for (int i = 60; i >= 1; i--) {
+        if (f[i] <= n) {
+            pos = i;
+            break;
+        }
+    }
+    for (int i = pos; i >= 1; i--) {
+        if (prime(f[i])) {
+            cout << f[i];
+            return 0;
+        }
+    }
+    return 0;
+}
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+bool fb(long long n)
+{
+    long long f0=1;
+    int f1=1;
+    int fn=0;
+    if(n<=1) return false;
+    while(fn<=n)
+    {
+        fn=f0+f1;
+        f0=f1;
+        f1=fn;
+        if(fn==n) return true;
+    }
+    return false;
+}
+bool snt(int x)
+{
+    if (x<2) return false;
+    for (int i=2;i<=sqrt(x);i++) {
+        if (x%i==0) return false;                           //code khắm
+    }                                                       //N1005B - Số nguyên tố fibonacci - http://laptrinhphothong.vn/Problem/Details/5626
+    return true;                                            //cach 2
+}
+int fibosnt(int n)
+{
+    int max=0;
+    for (int i=n;i>=0;i--) {
+        if (fb(i)==true && snt(i)==true) {
+            max=i;
+            break;
+        }
+    }
+    return max;
+}
+int n;
+int main()
+{
+    cin >> n;
+    cout << fibosnt(n);
+return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a=0;
+    string s1,s2;
+    cin>>s2>>s1;
+    for(int i=0;i<s2.size();i++){
+        string b=s2.substr(i,s1.size());                //N0623B - Xâu con 2 - http://laptrinhphothong.vn/Problem/Details/5752
+        if(s1==b){
+            a++;
+        }
+    }
+    cout << a;
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> computeLPS(string s1) {
+    vector<int> lps(s1.length());
+    int len = 0;
+    lps[0] = 0;
+    int i = 1;
+    while (i < s1.length()) {
+        if (s1[i] == s1[len]) {
+            len = len + 1;
+            lps[i] = len;
+            i = i + 1;
+        }
+        else {
+            if (len == 0) {
+                lps[i] = 0;
+                i = i + 1;
+            }
+            else {
+                len = lps[len - 1];
+            }
+        }
+    }
+
+    return lps;
+}
+
+void modifyString(string s, string s1, string s2) {
+    vector<int> lps = computeLPS(s1);
+    int i = 0;
+    int j = 0;
+    vector<int> found;
+    while (i < s.length()) {
+        if (s[i] == s1[j]) {
+            i = i + 1;
+            j = j + 1;
+        }
+        if (j == s1.length()) {
+            found.push_back(i - j);
+            j = lps[j - 1];
+        }
+        else if (i < s.length() && s1[j] != s[i]) {                                 //N0618C - Thay thế xâu - http://laptrinhphothong.vn/Problem/Details/5743
+            if (j == 0) {                                                           //code khắm
+                i = i + 1;
+            }
+            else {
+                j = lps[j - 1];
+            }
+        }
+    }
+    string ans = "";
+    int prev = 0;
+    for (int k = 0; k < found.size(); k++) {
+        if (found[k] < prev) {
+            continue;
+        }
+        ans.append(s.substr(prev, found[k] - prev));
+        ans.append(s2);
+        prev = found[k] + s1.size();
+    }
+    ans.append(s.substr(prev, s.length() - prev));
+    cout << ans << endl;
+}
+
+int main()
+{
+    string s, s1, s2;
+    getline(cin, s);
+    getline(cin, s1);
+    getline(cin, s2);
+    modifyString(s, s1, s2);
+    return 0;
+}
+
+
+
+
+#include <bits/stdc++.h>
+#include <regex>
+
+using namespace std;
+
+int main()
+{
+    string s, s1, s2;
+    getline(cin, s);
+    getline(cin, s1);                           ////N0618C - Thay thế xâu - http://laptrinhphothong.vn/Problem/Details/5743
+    getline(cin, s2);                           //code accecpted
+    s = regex_replace(s, regex(s1), s2);
+    cout << s;
+    return 0;
+}
+
+
+
+
+#include <iostream>
+using namespace std;
+long long tongn(long long n){
+    long long tong=0;
+    for(long long j=2;j<=2*n;j+=2) {
+           tong=tong+(j*j);
+       }
+      return tong;                      //N0346CC - Tổng chẵn bình phương 2 - http://laptrinhphothong.vn/Problem/Details/5937
+}
+int main() {
+    long long n,t,tong=0; cin >> n;
+    for(long long i=0;i<n;i++) {
+       cin >> t;
+       cout << tongn(t) << '\n';
+    }
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+bool snt(long long n){
+    if(n==0 || n==1) return false;
+    for(long long i=2;i<=sqrt(n);i++){
+        if(n%i==0) return false;
+    }
+    return true;
+}
+int a[505],n,dem=0;                     //HSG12NAB3 - Chênh lệch nguyên tố - http://laptrinhphothong.vn/Problem/Details/6075
+int main() {
+    cin >> n;
+    for(int i=0;i<n;i++) {
+        cin >> a[i];
+    }
+    for(int i=0;i<n-1;i++) {
+        for(int j=i+1;j<n;j++) {
+            if(snt(abs(a[i]-a[j]))==true) {
+                dem++;
+            }
+        }
+    }
+    cout << dem;
+    return 0;
+}
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<string> luu;
+string s; int n,kq=0;
+int main() {
+    cin >> n;
+    for(int i=0;i<n;i++) {
+        for(int j=0;j<n;j++) {
+            cin >> s;
+            luu.push_back(s);
+        }
+    }
+    int dem=1;
+    sort(luu.begin(),luu.end());                N0512C - Bảng ký tự - http://laptrinhphothong.vn/Problem/Details/5655
+    for(int i=0;i<luu.size();i++) {
+        if(luu[i]==luu[i+1]) {
+            dem++;
+        }
+        else {
+            dem=1;
+        }
+        kq=max(kq,dem);
+    }
+    cout << kq;
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+map<char,int>m;
+vector<char> luu;
+int dem=0;
+string pushback(string s) {
+    string temp;
+    for(int i=0;i<s.size();i++) {
+        temp.push_back(s[i]);
+    }
+    return temp;
+}
+string xoatrung(string s) {
+    set<char>luu;string temp;
+    for(int i=0;i<s.size();i++) {				
+        luu.insert(s[i]);
+    }
+    for(auto i : luu)  temp.push_back(i);
+    return temp;
+}
+int main() {                                //N0614C - Chữ số chung - http://laptrinhphothong.vn/Problem/Details/5702
+    string s,ss,S,s1,s2;
+    cin >> s1 >> s2;
+    string S1=xoatrung(s1), S2=xoatrung(s2);
+    s=pushback(S1); ss=pushback(S2);
+    S=s+ss;
+    for(int i=0;i<S.size();i++){
+        m[S[i]]++;
+    }
+    for(auto i : m) {
+        if(i.second==2) {
+            dem++;
+        }
+    }
+    cout << dem;
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+map<char,int>m;
+vector<char> luu ;
+string pushback(string s) {
+    string temp;
+    for(int i=0;i<s.size();i++) {
+        temp.push_back(s[i]);
+    }
+    return temp;
+}
+string xoatrung(string s) {
+    set<char>luu;string temp;
+    for(int i=0;i<s.size();i++) {
+        luu.insert(s[i]);
+    }
+    for(auto i : luu)  temp.push_back(i);
+    return temp;
+}
+int main() {
+    string s,ss,S,s1,s2;
+    cin >> s1 >> s2;
+    string S1=xoatrung(s1), S2=xoatrung(s2);                // là bài chữ số chung như trên. Nhung lần này thì cout ra luôn kí tự trùng lặp
+    s=pushback(S1); ss=pushback(S2);
+    S=s+ss;
+    for(int i=0;i<S.size();i++){
+        m[S[i]]++;
+    }
+    for(auto i : m) {
+        if(i.second==2) {
+            luu.push_back(i.first);
+        }
+    }
+    for(auto i : luu) cout << i << " ";
+    return 0;
+}
+
+
+
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#include <bits/stdc++.h>
+using namespace std;
+int n,sum,x,mx=INT_MIN;
+int main() 
+{
+    ios_base::sync_with_stdio(0);			//N0448C - Tổng dãy lớn nhất - http://laptrinhphothong.vn/Problem/Details/5943
+    cin.tie(0); cout.tie(0);
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+      cin>>x;
+      sum=max(x,x+sum);
+      mx=max(mx,sum);
+    }
+    cout<<mx;
+}
+
+
+
+#include <bits/stdc++.h>
+#define mod 1000000007
+#define ll long long
+using namespace std;
+ll mu(ll a, ll n)
+{
+    if(n==0) return 1;
+    ll  tam = mu(a,n/2);
+    tam = (tam*tam)%mod;
+    if(n%2==1) tam  = (tam*a)%mod;				// N1101A - Số tập con - http://laptrinhphothong.vn/Problem/Details/4664
+    return tam;
+}
+int main()
+{
+    long long a,n;
+     cin >> n;
+     cout << mu(2,n);
+}
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long a,n;
+    cin >> n;
+    if(n%2==0) cout << (n*(n+1)/2)-(n*(n/2+1)/2);				//PK0008B - Tổng tất cả các số lẻ - http://laptrinhphothong.vn/Problem/Details/5971
+    else {
+         n=n-1;
+         cout << (n*(n+1)/2)-(n*(n/2+1)/2);
+    }
+}
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool prime(int n) {
+    if (n < 2) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool sprime(int n) {
+    while (n > 0) {
+        if (prime(n) == false) {						// N1009C - Số siêu nguyên tố - http://laptrinhphothong.vn/Problem/Details/4659
+            return false;
+        }
+        n /= 10;
+    }
+
+    return true;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    if (sprime(n))  cout << "YES";
+    else cout << "NO";   
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    for (int i = 0; i < s.size(); i++) {			//N0611C - Mã hóa 2 - http://laptrinhphothong.vn/Problem/Details/4631
+        s[i] -= n;
+        if (s[i] < 'a') s[i] = s[i] + 'z' - 'a' + 1;
+    }
+    cout << s;
+    return 0;
+}
+
+
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+ll n, f[1000005], dem=0;
+int main() 
+{
+    f[1]=1;
+    f[2]=1;
+    for(ll i=3; i<=50; i++)
+        f[i]=f[i-1]+f[i-2];				// cách 1 - N0427D - Biểu diễn Fibonacci - http://laptrinhphothong.vn/Problem/Details/5691
+    cin>>n;
+    for(ll i=50; i>=1; i--)
+    {
+        if(n>=f[i])
+        {
+            n= n-f[i];
+            dem++;
+        }
+    }
+    cout<<dem;
+    return 0;
+}
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	int n,i,dem=0;
+	cin>>n;
+	long long a[100];
+	a[0]=1;
+	a[1]=1;
+	for (i=2;i<100;i++)
+	{
+		a[i]=a[i-1]+a[i-2];				// cách 2 - N0427D - Biểu diễn Fibonacci - http://laptrinhphothong.vn/Problem/Details/5691
+		if (a[i]>n){
+			dem=1;
+			n=n-a[i-1];
+			break;
+		}
+	}
+	while (n>0)
+	{
+		for (i;i>=0;i--)
+		{
+			if (a[i]<=n)
+			{
+			dem+=1;
+			n=n-a[i];
+			}
+		}
+	}
+	cout<<dem;
+}
+
+
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+ll a[1000009];
+#define nmax 1000009
+   	
+
+int main()
+{
+	memset(a,0,sizeof(a));
+	for(ll i=1;i<=nmax;i++)
+	{
+		for(ll j=i;j<=nmax;j+=i)
+		if(i!=j)a[j]+=i;
+	}
+	ll l,r,res=0;			//N1018D - Số bạn bè - http://laptrinhphothong.vn/Problem/Details/5790
+	cin>>l>>r;
+	for(int i=l;i<=r;i++)
+	{
+		if(a[i]<=r&&a[i]>=l&&a[a[i]]==i)//cout<<i<<" "<<a[a[i]];
+		res++;a[i]=0;
+	}
+	//cout<<res;
+	cout<<res;
+}
+
+
+// sau khi làm bai trên tôi đã lên trang 1 ltpt vào ngày 1/9/2022
+// kết quả cố gắng từ đầu năm lớp 9 34->267 bài :V
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    long long n, a;
+    cin >> n;
+    long long pos = 0, neg = 0;
+    for (int i = 1; i <= n; i++) {		//N0436B - Dương và âm - http://laptrinhphothong.vn/Problem/Details/5874
+        cin >> a;
+        if (a > 0) pos++;
+        if (a < 0) neg++;
+    }
+    cout << pos * neg;
+    return 0;
+}
+
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> v;
+int res, a, n, l, r;
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+        cin >> a;
+        if (a == 4) res++; 
+        else v.push_back(a);
+    }
+    sort(v.begin(), v.end(), greater<int>());				//PK0031C - TAXI - http://laptrinhphothong.vn/Problem/Details/5968
+    r = v.size() - 1;
+    for (l = 0; l <= r; ++l) {
+        res++;
+        int tmp = v[l];
+        while (tmp + v[r] <= 4 && l <= r) {
+            --r;
+            tmp += v[r];
+        }
+    }
+    cout << res;
+    return 0;
+}
+
+
+#include <iostream>
+using namespace std;
+
+
+int n, Q, b[1000005];
+
+int main() {
+    cin >> n;
+    for (int i = 1; i <=n; ++i) {
+        int a; cin >> a;
+        b[i] = b[i - 1] + a;				//IDP1104A - IDP1104A - http://laptrinhphothong.vn/Problem/Details/5632
+    }
+    
+    cin >> Q;
+    while (Q--) {
+        int a; cin >> a;
+        cout << b[a] << '\n';
+    }
+    return 0;
+}
+
+
+#include<bits/stdc++.h>
+#define p 1e6
+using namespace std;
+bool isPrime(int n)
+{
+ if(n<2) return false;
+ if(n<4) return true;
+ if(n%2==0|n%3==0) return false;
+ for(int i=5;i*i<=n;i+=6)
+  if(n%i==0|n%(i+2)==0)
+   return false;
+ return true;
+}
+int main()
+{
+ int t,d=0;
+ cin>>t;
+ vector<int> a;
+ for(int i=5;d<10000;i+=2)
+ {
+  if(isPrime(i) & isPrime(i+6))			//PK0030C - Số nguyên tố tri kỉ - http://laptrinhphothong.vn/Problem/Details/5957
+  {
+   a.push_back(i);
+   d++;   
+  }
+ }
+ for(;t>0;t--)
+ {
+  int n;
+  cin>>n;
+  cout<<a[n-1]<<" "<<a[n-1]+6<<"\n";
+ }
+}
+
+
+
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main()
+{
+	ll n;
+	cin >> n;
+	if (n < 3) {
+		cout << -1;
+		return 0;
+	}
+	for (ll i = 3;i <= n;i++)			//PK0027C - Dãy số đơn giản	- http://laptrinhphothong.vn/Problem/Details/5949
+	{
+		ll t = (i+1)*i/2;
+		ll m = sqrt(t);
+		if (m*m+m == t) {
+			cout << i << " ";
+		}
+	}
+	return 0;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int main (){
+    long int n, a, l = 0, c = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++){			//PK0029C - Số cá tính - http://laptrinhphothong.vn/Problem/Details/5951
+        cin >> a;
+        if (a % 2 == 0) {
+            c++;
+            if (l > 1 ) {
+                cout << a;
+                break;
+            }
+        } else {
+            l++;
+            if (c > 1){ 
+                cout << a;
+                break;
+            }
+        }
+        
+    }
+    return 0;
+}
+
+*/
